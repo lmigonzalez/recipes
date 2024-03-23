@@ -1,0 +1,54 @@
+{
+  "reviews": [
+    {
+      "username": "CookingFan123",
+      "rating": 5,
+      "comment": "Absolutely love this site! The recipes are easy to follow, and everything I've made has turned out delicious."
+    },
+    {
+      "username": "EpicureanDelight",
+      "rating": 4,
+      "comment": "Great selection of recipes. I found some amazing new favorites. The interface is user-friendly too!"
+    },
+    {
+      "username": "BusyMom",
+      "rating": 5,
+      "comment": "This has been a lifesaver for quick family meals. The kids love the dishes, especially the pancakes!"
+    },
+    {
+      "username": "VeganVibes",
+      "rating": 4,
+      "comment": "Impressed with the range of vegan options. It’s now my go-to site for plant-based recipes."
+    },
+    {
+      "username": "ChefInTraining",
+      "rating": 5,
+      "comment": "As an aspiring chef, I find the detailed recipes and tips extremely helpful. This site has helped me improve my cooking skills."
+    },
+    {
+      "username": "FoodieForever",
+      "rating": 4,
+      "comment": "Great recipes and beautiful photos. I just wish there were more international dishes."
+    },
+    {
+      "username": "GlutenFreeGal",
+      "rating": 5,
+      "comment": "Fantastic gluten-free recipe selection. I don’t feel limited in my choices anymore."
+    },
+    {
+      "username": "MeatLover",
+      "rating": 3,
+      "comment": "Good variety of recipes, but I would love to see more for barbecue and grilling."
+    },
+    {
+      "username": "HealthNut",
+      "rating": 5,
+      "comment": "The healthy recipe options are amazing! I’ve found so many new, nutritious meals that taste great."
+    },
+    {
+      "username": "CulinaryExplorer",
+      "rating": 4,
+      "comment": "I’ve enjoyed exploring the diverse recipes. The site is very informative and provides great cooking tips."
+    }
+  ]
+}

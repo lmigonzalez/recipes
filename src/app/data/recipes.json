@@ -1,0 +1,10 @@
+{
+  "recipes": [
+    { "name": "Spaghetti Carbonara" },
+    { "name": "Margherita Pizza" },
+    { "name": "Chicken Tikka Masala" },
+    { "name": "Beef Stroganoff" },
+    { "name": "Caesar Salad" },
+    { "name": "Vegetarian Chili" }
+  ]
+}
