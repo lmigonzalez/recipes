@@ -3,14 +3,22 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+
   body {
     @apply bg-background text-foreground;
   }
 
   main {
     @apply w-full;
+  }
+  ol{
+    @apply list-decimal list-inside
+  }
+}
+
+
+@layer components{
+  .medium-width{
+    @apply w-[1380px] max-w-full m-auto px-6
   }
 }
