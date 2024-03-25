@@ -46,6 +46,7 @@ interface RecipeProps {
 
 const Page = async () => {
   const { recipes }: { recipes: RecipeProps[] } = await fetchRandomRecipes();
+
   return (
     <main className="py-32 medium-width">
       <h1 className="text-3xl font-medium text-center mb-10 underline decoration-wavy decoration-my_red underline-offset-8">
@@ -53,7 +54,7 @@ const Page = async () => {
       </h1>
 
       <div className="grid md:grid-cols-3 gap-5">
-        {recipes.length > 0 &&
+        {recipes?.length > 0 &&
           recipes.map((item, index) => {
             return <RecipeCard key={index} recipe={item} />;
           })}
