@@ -5,7 +5,7 @@ export async function getRecipes(name: string) {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "1d18daafe8msha705f48890ca5c4p1ed968jsnf59eb7ea8127",
+      "X-RapidAPI-Key": process.env.RAPID_API_KEY || "",
       "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
     },
   };
@@ -37,7 +37,7 @@ const Page = async ({ params }: { params: { name: string } }) => {
       .join(" ");
     return newTitle;
   }
-  console.log(results);
+
 
   return (
     <main className="medium-width py-32">

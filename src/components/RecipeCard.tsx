@@ -1,7 +1,8 @@
+"use client";
 import React, { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
+import { useSession } from "next-auth/react";
 interface RecipeProps {
   id: number;
   image: string;
@@ -9,12 +10,38 @@ interface RecipeProps {
 }
 
 const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
+  const { data: session } = useSession();
+
+
+  async function saveRecipe() {
+    const data = {
+      userId: session?.user?.id,
+      recipeId: recipe.id,
+      title: recipe.title,
+      image: recipe.image,
+    };
+
+    try {
+      const response = await fetch("/api/users", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
-    <Link
-      href={`/recipe/${recipe.id}`}
-      className="hover:shadow-2xl hover:scale-[1.01] rounded-md transition-all h-[300px] bg-my_black relative"
-    >
-      <button className="absolute right-2 top-2 bg-white rounded-full p-2 shadow-lg hover:bg-sky-200 transition-all">
+    <div className="hover:shadow-2xl rounded-md transition-all h-[300px] bg-my_black relative">
+      <button
+        onClick={saveRecipe}
+        className="absolute right-2 top-2 bg-white rounded-full p-2 shadow-lg hover:bg-sky-200 transition-all"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -39,10 +66,15 @@ const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
           className="w-full rounded-t-md"
         />
         <div className=" text-white p-2 rounded-b-md  h-fit">
-          <h3 className="font-semibold mb-2"> {recipe.title}</h3>
+          <Link href={`/recipe/${recipe.id}`}>
+            <h3 className="font-medium mb-2 hover:text-my_red transition-colors">
+              {" "}
+              {recipe.title}
+            </h3>
+          </Link>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
