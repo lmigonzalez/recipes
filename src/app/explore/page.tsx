@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 
-export async function getRandomRecipes() {
+export async function fetchRandomRecipes() {
   const url =
     "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?tags=vegetarian%2Cdessert&number=9";
   const options = {
@@ -45,7 +45,7 @@ interface RecipeProps {
 }
 
 const Page = async () => {
-  const { recipes }: { recipes: RecipeProps[] } = await getRandomRecipes();
+  const { recipes }: { recipes: RecipeProps[] } = await fetchRandomRecipes();
   return (
     <main className="py-32 medium-width">
       <h1 className="text-3xl font-medium text-center mb-10 underline decoration-wavy decoration-my_red underline-offset-8">

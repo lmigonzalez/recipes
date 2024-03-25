@@ -48,6 +48,7 @@ const Page = async ({ params }: { params: { name: string } }) => {
   );
 
   function transformText(text: string) {
+    
     let newTitle = text
       .split("-")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
