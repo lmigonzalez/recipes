@@ -21,7 +21,7 @@ const Popular = () => {
           return (
             <Link
               key={index}
-              href={TitleToLink(item.name)}
+              href={`/recipes/${TitleToLink(item.name)}`}
               className="hover:shadow-2xl hover:scale-[1.01] rounded-md transition-all"
             >
               <div className="">
