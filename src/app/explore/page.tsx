@@ -37,7 +37,7 @@ interface RecipeProps {
   extendedIngredients: IngredientProps[];
 }
 
-const Explore = async () => {
+const Page = async () => {
   const { recipes }: { recipes: RecipeProps[] } = await getRandomRecipes();
   return (
     <main className="py-32 medium-width">
@@ -55,4 +55,4 @@ const Explore = async () => {
   );
 };
 
-export default Explore;
+export default Page
