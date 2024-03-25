@@ -5,7 +5,7 @@ const NotFound = () => {
     <main className="py-32">
       <div className="text-center mt-10">
         <p className="text-lg font-semibold">
-          Oops! The page you're looking for cannot be found.
+          Oops! The page you&apos;re looking for cannot be found.
         </p>
         <p className="text-lg font-semibold">
           Please check the URL or go back to the{" "}
