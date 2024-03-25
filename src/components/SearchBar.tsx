@@ -10,7 +10,8 @@ const SearchBar = () => {
     setSearchValue(e.target.value.toLocaleLowerCase());
   }
 
-  function handleSubmit() {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     router.push(`/recipes/${searchValue}`);
   }
 
@@ -18,7 +19,10 @@ const SearchBar = () => {
     setSearchValue("");
   }, [pathname]);
   return (
-    <div className="bg-white border-b-slate-200 h-10 relative flex items-center">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white border-b-slate-200 h-10 relative flex items-center"
+    >
       <input
         name="search"
         value={searchValue}
@@ -28,6 +32,7 @@ const SearchBar = () => {
         className="h-full pl-6 w-full focus:outline-my_red"
       />
       <button
+        type="submit"
         disabled={searchValue.length < 3}
         onClick={handleSubmit}
         className={`absolute right-0 h-10 px-2  flex justify-center items-center gap-2 text-white ${
@@ -50,7 +55,7 @@ const SearchBar = () => {
           />
         </svg>
       </button>
-    </div>
+    </form>
   );
 };
 
