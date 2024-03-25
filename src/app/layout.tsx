@@ -21,7 +21,7 @@ export default function RootLayout({
     <AuthProvider>
       <html lang="en">
         <body
-          className={`${inter.className} flex min-h-screen flex-col items-center relative`}
+          className={`${inter.className} flex min-h-screen flex-col items-center  relative`}
         >
           <Header /> {children} <Footer />
         </body>

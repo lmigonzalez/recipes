@@ -19,6 +19,6 @@
 
 @layer components{
   .medium-width{
-    @apply w-[1380px] max-w-full m-auto px-6
+    @apply w-[1380px] max-w-full px-6
   }
 }

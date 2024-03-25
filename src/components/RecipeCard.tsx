@@ -1,10 +1,10 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-
-
+import { usePathname, useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 interface RecipeProps {
   id: number;
   image: string;
@@ -12,9 +12,19 @@ interface RecipeProps {
 }
 
 const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
+  const [showLoginWindow, setShowLoginWindow] = useState(false);
+
   const { data: session }: any = useSession();
+  const pathname = usePathname();
+  const router = useRouter();
 
   async function saveRecipe() {
+    console.log(session);
+    if (!session) {
+      setShowLoginWindow(true);
+
+      return;
+    }
     const data = {
       userId: session?.user?.id,
       recipeId: recipe.id,
@@ -23,7 +33,7 @@ const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
     };
 
     try {
-      const response = await fetch("/api/users", {
+      await fetch("/api/users", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +41,10 @@ const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
         body: JSON.stringify(data),
       });
 
-      console.log(response);
+      if (pathname.includes("/saves")) {
+        // window.location.reload();
+        router.refresh();
+      }
     } catch (err) {
       console.log(err);
     }
@@ -39,9 +52,33 @@ const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
 
   return (
     <div className="hover:shadow-2xl rounded-md transition-all bg-my_black relative">
+      {showLoginWindow && (
+        <div className="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-50 backdrop-blur-sm z-[100] flex justify-center items-center">
+          <div className="bg-white p-4 rounded-xl shadow-lg text-center">
+            <p className="text-md font-medium">
+              Please log in to save recipes.
+            </p>
+            <div className="flex gap-4 mt-5">
+              <button
+                className="w-fit rounded-full px-8 py-2 overflow-hidden group bg-red-700  text-white hover:ring-2 hover:ring-offset-2 hover:ring-my_red transition-all ease-out duration-300"
+                onClick={() => setShowLoginWindow(false)}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => signIn()}
+                className="w-fit rounded-full px-8 py-2 overflow-hidden group bg-green-700 text-white hover:ring-2 hover:ring-offset-2 hover:ring-my_red transition-all ease-out duration-300"
+              >
+                Sign In
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <button
         onClick={saveRecipe}
-        className="absolute right-2 top-2 bg-white rounded-full p-2 shadow-lg hover:bg-sky-200 transition-all"
+        className="absolute right-2 top-2 bg-my_red rounded-full p-2 shadow-lg hover:bg-red-600 text-white transition-all"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

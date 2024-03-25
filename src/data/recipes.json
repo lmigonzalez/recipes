@@ -1,10 +1,10 @@
 {
   "recipes": [
-    { "name": "Spaghetti Carbonara" },
-    { "name": "Margherita Pizza" },
-    { "name": "Chicken Tikka Masala" },
-    { "name": "Beef Stroganoff" },
-    { "name": "Caesar Salad" },
-    { "name": "Vegetarian Chili" }
+    { "name": "Spaghetti" },
+    { "name": "Pizza" },
+    { "name": "Chicken" },
+    { "name": "Beef" },
+    { "name": "Salad" },
+    { "name": "Vegetarian" }
   ]
 }

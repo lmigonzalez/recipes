@@ -13,7 +13,7 @@ const Hero = () => {
           Discover, Cook, and Save Your Favorite Culinary Creations
         </h2>
 
-        <MainLinkBtn text="Random Recipes" url="/explore" />
+        <MainLinkBtn text="Random Recipes" url="explore" />
       </div>
     </section>
   );
