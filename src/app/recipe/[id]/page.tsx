@@ -22,7 +22,7 @@ async function getRecipeById(id: number) {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": process.env.RAPID_API_KEY || "",
+      "X-RapidAPI-Key": process.env.RAPID_API_KEY as string,
       "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
     },
   };
