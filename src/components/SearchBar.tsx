@@ -34,7 +34,6 @@ const SearchBar = () => {
       <button
         type="submit"
         disabled={searchValue.length < 3}
-        onClick={handleSubmit}
         className={`absolute right-0 h-10 px-2  flex justify-center items-center gap-2 text-white ${
           searchValue.length < 3 ? "bg-gray-400" : "bg-my_red"
         } `}
