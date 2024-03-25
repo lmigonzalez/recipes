@@ -1,8 +1,7 @@
 import connectDB from "../../../config/database";
 import User from "../../../models/User";
 import { NextResponse } from "next/server";
-export const GET = async (request, route) => {
-  console.log(request.nextUrl.searchParams.get("id"));
+export const GET = async (request) => {
   const userId = request.nextUrl.searchParams.get("id");
   try {
     await connectDB();

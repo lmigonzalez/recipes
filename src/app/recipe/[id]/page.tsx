@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: { id: number } }) {
   };
 }
 
-export async function getRecipeById(id: number) {
+async function getRecipeById(id: number) {
   const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/information`;
   const options = {
     method: "GET",

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 
-export async function fetchRandomRecipes() {
+async function fetchRandomRecipes() {
   const url =
     "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?tags=vegetarian%2Cdessert&number=9";
   const options = {
