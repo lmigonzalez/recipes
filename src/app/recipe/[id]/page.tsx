@@ -1,16 +1,19 @@
 import React from "react";
 import Image from "next/image";
 import Parse from "html-react-parser";
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string; name: string };
-}) {
-  const { id } = params;
+export async function generateMetadata({ params }: { params: { id: number } }) {
+  const recipeInfo: Recipe = await getRecipeById(params.id);
+  function transformTitle() {
+    let newTitle = recipeInfo.title
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+    return newTitle;
+  }
 
   return {
-    title: ``,
-    description: ``,
+    title: `${transformTitle()} Recipe | Recipes`,
+    description: `Learn how to make delicious ${recipeInfo.title} with our easy-to-follow recipe. Discover the ingredients, step-by-step instructions, and cooking tips to create a mouthwatering dish. Explore more recipes on Recipes today!`,
   };
 }
 

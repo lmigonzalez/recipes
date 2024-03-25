@@ -1,5 +1,12 @@
 import React from "react";
+import type { Metadata } from "next";
 import RecipeCard from "@/components/RecipeCard";
+
+export const metadata: Metadata = {
+  title: "Explore Random Recipes | Recipes",
+  description: "Discover new and exciting random recipes on Recipes' Explore page. Explore a diverse collection of dishes ranging from appetizers to desserts. Get inspired and try something delicious today!",
+};
+
 
 export async function getRandomRecipes() {
   const url =

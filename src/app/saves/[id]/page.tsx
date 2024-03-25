@@ -1,5 +1,12 @@
 import React from "react";
+import type { Metadata } from "next";
 import RecipeCard from "@/components/RecipeCard";
+
+export const metadata: Metadata = {
+  title: "Saved Recipes | Recipes",
+  description: "Access all your saved recipes in one place on Recipes' Saved Recipes page. Keep track of your favorite dishes, create meal plans, and never lose a recipe again. Start building your personalized recipe collection today!",
+};
+
 export async function getSavedRecipes(id: number) {
   const url = `http://localhost:3000/api/users?id=${id}`;
   const options = {

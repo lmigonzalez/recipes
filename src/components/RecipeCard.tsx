@@ -3,6 +3,8 @@ import React, { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+
+
 interface RecipeProps {
   id: number;
   image: string;
@@ -36,7 +38,7 @@ const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
   }
 
   return (
-    <div className="hover:shadow-2xl rounded-md transition-all h-[300px] bg-my_black relative">
+    <div className="hover:shadow-2xl rounded-md transition-all bg-my_black relative">
       <button
         onClick={saveRecipe}
         className="absolute right-2 top-2 bg-white rounded-full p-2 shadow-lg hover:bg-sky-200 transition-all"
