@@ -10,8 +10,7 @@ interface RecipeProps {
 }
 
 const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
-  const { data: session } = useSession();
-
+  const { data: session }: any = useSession();
 
   async function saveRecipe() {
     const data = {

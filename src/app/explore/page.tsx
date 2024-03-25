@@ -1,7 +1,6 @@
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
 import RecipeCard from "@/components/RecipeCard";
+
 export async function getRandomRecipes() {
   const url =
     "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?tags=vegetarian%2Cdessert&number=9";
@@ -34,7 +33,7 @@ interface RecipeProps {
   readyInMinutes: number;
   image: string;
   summary: string;
-  ocasions: string[];
+  occasions: string[];
   extendedIngredients: IngredientProps[];
 }
 
