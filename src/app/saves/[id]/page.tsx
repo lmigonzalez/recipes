@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import RecipeCard from "@/components/RecipeCard";
 import MainLinkBtn from "@/components/MainLinkBtn";
-import { useRouter } from "next/navigation";
 export const metadata: Metadata = {
   title: "Saved Recipes | Recipes",
   description:
@@ -30,8 +29,6 @@ interface Props {
   params: { id: string };
 }
 const Page = async ({ params }: Props) => {
-  const router = useRouter()
-  router.refresh()
   const recipes = await getSavedRecipes(params.id);
 
   return (
