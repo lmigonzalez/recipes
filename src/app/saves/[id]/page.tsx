@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import RecipeCard from "@/components/RecipeCard";
 import MainLinkBtn from "@/components/MainLinkBtn";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 export const metadata: Metadata = {
   title: "Saved Recipes | Recipes",
   description:
