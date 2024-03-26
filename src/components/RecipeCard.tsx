@@ -5,16 +5,12 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-interface RecipeProps {
-  id: number;
-  image: string;
-  title: string;
-}
 
-const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
+
+const RecipeCard: FC<{ recipeInfo: Recipe | SearchResult }> = ({ recipeInfo }) => {
   const [showLoginWindow, setShowLoginWindow] = useState(false);
 
-  const { data: session }: any = useSession();
+  const { data: session } = useSession();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -27,9 +23,9 @@ const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
     }
     const data = {
       userId: session?.user?.id,
-      recipeId: recipe.id,
-      title: recipe.title,
-      image: recipe.image,
+      recipeId: recipeInfo.id,
+      title: recipeInfo.title,
+      image: recipeInfo.image,
     };
 
     try {
@@ -97,17 +93,17 @@ const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
       </button>
       <div className="">
         <Image
-          src={`${recipe.image}`}
-          alt={recipe.title}
+          src={`${recipeInfo.image}`}
+          alt={recipeInfo.title}
           width={300}
           height={200}
           className="w-full rounded-t-md"
         />
         <div className=" text-white p-2 rounded-b-md  h-fit">
-          <Link href={`/recipe/${recipe.id}`}>
+          <Link href={`/recipe/${recipeInfo.id}`}>
             <h3 className="font-medium mb-2 hover:text-my_red transition-colors">
               {" "}
-              {recipe.title}
+              {recipeInfo.title}
             </h3>
           </Link>
         </div>

@@ -2,39 +2,36 @@ import React from "react";
 import type { Metadata } from "next";
 import RecipeCard from "@/components/RecipeCard";
 import MainLinkBtn from "@/components/MainLinkBtn";
+import { User } from "next-auth";
 export const metadata: Metadata = {
   title: "Saved Recipes | Recipes",
   description:
     "Access all your saved recipes in one place on Recipes' Saved Recipes page. Keep track of your favorite dishes, create meal plans, and never lose a recipe again. Start building your personalized recipe collection today!",
 };
 
-async function getSavedRecipes(id: number) {
+async function getSavedRecipes(id: string) {
   const url = `https://recipes-seven-sand.vercel.app/api/users?id=${id}`;
   const options: RequestInit = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-    cache: "no-store", // Move cache option inside the options object
+    cache: "no-store", 
   };
+
   try {
     const response = await fetch(url, options);
-    const result = await response.json();
+    const result = await response.json() as Recipe[];
     return result;
   } catch (err) {
     console.log(err);
+    return []
   }
 }
 
-interface RecipeProps {
-  id: number;
-  title: string;
-  image: string;
-}
+const Page = async (params: User) => {
 
-const Page = async ({ params }: { params: { id: number } }) => {
-  
-  const recipes: RecipeProps[] = await getSavedRecipes(params.id);
+  const recipes = await getSavedRecipes(params.id);
 
   return (
     <main className="medium-width py-32">
@@ -44,7 +41,7 @@ const Page = async ({ params }: { params: { id: number } }) => {
       <div className="grid md:grid-cols-3 gap-5">
         {recipes.length > 0 ? (
           recipes.map((item, index) => {
-            return <RecipeCard key={index} recipe={item} />;
+            return <RecipeCard key={index} recipeInfo={item} />;
           })
         ) : (
           <div className="flex justify-center items-center flex-col md:col-span-3 mt-10">

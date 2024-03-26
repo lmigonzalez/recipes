@@ -20,43 +20,26 @@ async function fetchRandomRecipes() {
   };
   try {
     const response = await fetch(url, options);
-    const result = await response.json();
-    return result;
+    const {recipes} = await response.json()  ;
+    return recipes as Recipe[]; 
   } catch (err) {
     console.log(err);
+    return []
   }
 }
 
-interface IngredientProps {
-  id: number;
-  name: string;
-  amount: number;
-  unit: string;
-}
-
-interface RecipeProps {
-  id: number;
-  title: string;
-  readyInMinutes: number;
-  image: string;
-  summary: string;
-  occasions: string[];
-  extendedIngredients: IngredientProps[];
-}
-
 const Page = async () => {
-  const { recipes }: { recipes: RecipeProps[] } = await fetchRandomRecipes();
-
+  const  recipes  = await fetchRandomRecipes();
+  console.log(recipes)
   return (
     <main className="py-32 medium-width">
       <h1 className="text-3xl font-medium text-center mb-10 underline decoration-wavy decoration-my_red underline-offset-8">
         Random Recipes
-      </h1>
+      </h1> 
 
-      <div className="grid md:grid-cols-3 gap-5">
-        {recipes?.length > 0 &&
-          recipes.map((item, index) => {
-            return <RecipeCard key={index} recipe={item} />;
+      <div className="grid md:grid-cols-3 gap-5">        
+         { recipes.map((item, index) => {
+            return <RecipeCard key={index} recipeInfo={item} />;
           })}
       </div>
     </main>

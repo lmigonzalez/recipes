@@ -2,9 +2,9 @@ import React from "react";
 import Image from "next/image";
 import Parse from "html-react-parser";
 export async function generateMetadata({ params }: { params: { id: number } }) {
-  const recipeInfo: Recipe = await getRecipeById(params.id);
+  const recipeInfo = await getRecipeById(params.id);
   function transformTitle() {
-    let newTitle = recipeInfo.title
+    let newTitle = recipeInfo?.title
       .split("-")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: { id: number } }) {
 
   return {
     title: `${transformTitle()} Recipe | Recipes`,
-    description: `Learn how to make delicious ${recipeInfo.title} with our easy-to-follow recipe. Discover the ingredients, step-by-step instructions, and cooking tips to create a mouthwatering dish. Explore more recipes on Recipes today!`,
+    description: `Learn how to make delicious ${recipeInfo?.title} with our easy-to-follow recipe. Discover the ingredients, step-by-step instructions, and cooking tips to create a mouthwatering dish. Explore more recipes on Recipes today!`,
   };
 }
 
@@ -29,24 +29,16 @@ async function getRecipeById(id: number) {
   try {
     const response = await fetch(url, options);
     const result = await response.json();
-    return result;
+    return result as Recipe;
   } catch (err) {
     console.log(err);
   }
 }
 
-interface Recipe {
-  title: string;
-  readyInMinutes: number;
-  image: string;
-  summary: string;
-  winePairing: { pairedWines: string[]; pairingText: string };
-  instructions: string;
-  extendedIngredients: { originalName: string; amount: number; unit: string }[];
-}
-
 const Page = async ({ params }: { params: { id: number } }) => {
-  const recipeInfo: Recipe = await getRecipeById(params.id);
+  const recipeInfo = await getRecipeById(params.id);
+  if(!recipeInfo)return <p>Recipe Not Found</p>
+  console.log()
 
   return (
     <main className="medium-width py-32">

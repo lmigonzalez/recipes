@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 const Page = () => {
   const { data: session } = useSession();
-
+ 
   const router = useRouter();
   const userId = session?.user?.id;
   useEffect(() => {

@@ -1,6 +1,9 @@
 import React from "react";
 import RecipeCard from "@/components/RecipeCard";
-export async function generateMetadata({ params }: { params: { name: string } }) {
+
+interface Props { params: { name: string } };
+
+export async function generateMetadata({ params }: Props ) {
   function transformTitle() {
     let newTitle = params.name
       .split("-")
@@ -29,21 +32,18 @@ async function getRecipes(name: string) {
 
   try {
     const response = await fetch(url, options);
-    const result = await response.json();
-    return result;
+    const {results} = await response.json() ;
+    return results as SearchResult[];
   } catch (error) {
     console.error(error);
+    return []
   }
 }
 
-interface ResultsProps {
-  id: number;
-  title: string;
-  image: string;
-}
 
-const Page = async ({ params }: { params: { name: string } }) => {
-  const { results }: { results: ResultsProps[] } = await getRecipes(
+const Page = async ({ params }: Props) => {
+
+  const  results = await getRecipes(
     params.name
   );
 
@@ -66,7 +66,7 @@ const Page = async ({ params }: { params: { name: string } }) => {
       <div className="grid md:grid-cols-3 gap-5">
         {results.length > 0 ? (
           results.map((item, index) => {
-            return <RecipeCard key={index} recipe={item} />;
+            return <RecipeCard key={index} recipeInfo={item} />;
           })
         ) : (
           <div className="col-span-3 text-center text-lg text-my_red">
