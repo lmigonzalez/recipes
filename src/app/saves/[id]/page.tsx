@@ -2,7 +2,8 @@ import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import RecipeCard from "@/components/RecipeCard";
 import MainLinkBtn from "@/components/MainLinkBtn";
-import { User } from "next-auth";
+export const dynamic = "force-dynamic";
+export const revalidate = 10;
 export const metadata: Metadata = {
   title: "Saved Recipes | Recipes",
   description:
