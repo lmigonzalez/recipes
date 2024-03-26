@@ -8,11 +8,11 @@ const Page = () => {
 
   const router = useRouter();
   const userId = session?.user?.id;
-    useEffect(() => {
-      if (userId) {
-        router.push(`/saves/${userId}`);
-      }
-    }, [userId, router]);
+  useEffect(() => {
+    if (userId) {
+      router.push(`/saves/${userId}`);
+    }
+  }, [userId, router]);
   return (
     <main className="py-32">
       <div className="text-center mt-10">
@@ -21,7 +21,10 @@ const Page = () => {
         </p>
         <button
           className="w-fit rounded-full px-8 py-2 overflow-hidden group bg-my_red  text-white hover:ring-2 hover:ring-offset-2 hover:ring-my_red transition-all ease-out duration-300"
-          onClick={() => signIn()}
+          onClick={() => {
+            signIn();
+            router.push(`/saves/${userId}`);
+          }}
         >
           Sign In
         </button>

@@ -14,7 +14,7 @@ async function getSavedRecipes(id: number) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      cache: "no-store",
+      cache: "no-cache",
     },
   };
   try {
