@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 async function getSavedRecipes(id: number) {
-  const url = `http://localhost:3000/api/users?id=${id}`;
+  const url = `recipes-seven-sand.vercel.app/api/users?id=${id}`;
   const options = {
     method: "GET",
     headers: {
