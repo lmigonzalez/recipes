@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import RecipeCard from "@/components/RecipeCard";
 import MainLinkBtn from "@/components/MainLinkBtn";
@@ -38,6 +38,9 @@ const Page = async ({params}: Props) => {
         Your Saved Recipes
       </h1>
       <div className="grid md:grid-cols-3 gap-5">
+        <Suspense fallback={<p>Loading weather...</p>}>
+        
+      
         {recipes.length > 0 ? (
           recipes.map((item, index) => {
             return <RecipeCard key={index} recipeInfo={item} />;
@@ -47,7 +50,7 @@ const Page = async ({params}: Props) => {
             <p>You currently have no saved recipes.</p>
             <MainLinkBtn text="Explore Recipes" url="explore" />
           </div>
-        )}
+        )}</Suspense>
       </div>
     </main>
   );

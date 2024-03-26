@@ -6,21 +6,23 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-
-const RecipeCard: FC<{ recipeInfo: Recipe | SearchResult }> = ({ recipeInfo }) => {
+const RecipeCard: FC<{ recipeInfo: Recipe | SearchResult }> = ({
+  recipeInfo,
+}) => {
   const [showLoginWindow, setShowLoginWindow] = useState(false);
+  const [showSaveBtn, setShowSaveBtn] = useState(true);
 
   const { data: session } = useSession();
   const pathname = usePathname();
   const router = useRouter();
 
   async function saveRecipe() {
- 
     if (!session) {
       setShowLoginWindow(true);
 
       return;
     }
+    setShowSaveBtn(false);
     const data = {
       userId: session?.user?.id,
       recipeId: recipeInfo.id,
@@ -38,11 +40,10 @@ const RecipeCard: FC<{ recipeInfo: Recipe | SearchResult }> = ({ recipeInfo }) =
       });
 
       if (pathname.includes("/saves")) {
-
         router.refresh();
       }
     } catch (err) {
-     return null
+      return null;
     }
   }
 
@@ -72,25 +73,28 @@ const RecipeCard: FC<{ recipeInfo: Recipe | SearchResult }> = ({ recipeInfo }) =
         </div>
       )}
 
-      <button
-        onClick={saveRecipe}
-        className="absolute right-2 top-2 bg-my_red rounded-full p-2 shadow-lg hover:bg-red-600 text-white transition-all"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
+      {showSaveBtn && (
+        <button
+          onClick={saveRecipe}
+          className="absolute right-2 top-2 bg-my_red rounded-full p-2 shadow-lg hover:bg-red-600 text-white transition-all"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-          />
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+            />
+          </svg>
+        </button>
+      )}
+
       <div className="">
         <Image
           src={`${recipeInfo.image}`}
