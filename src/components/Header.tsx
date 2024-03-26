@@ -7,8 +7,10 @@ import { LiteralUnion, ClientSafeProvider } from "next-auth/react";
 import { BuiltInProviderType } from "next-auth/providers/index";
 import SearchBar from "./SearchBar";
 import MobileMenu from "./MobileMenu";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
   const { data: session } = useSession();
   const [providers, setProviders] = useState<Record<
     LiteralUnion<BuiltInProviderType, string>,
@@ -83,7 +85,10 @@ const Header = () => {
             <li>
               {session ? (
                 <button
-                  onClick={() => signOut()}
+                  onClick={() => {
+                    signOut();
+                    router.push("/");
+                  }}
                   className="bg-red-700 rounded text-white font-medium py-1 px-5"
                 >
                   Sign Out

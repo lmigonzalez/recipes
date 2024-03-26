@@ -42,7 +42,7 @@ const RecipeCard: FC<{ recipe: RecipeProps }> = ({ recipe }) => {
       });
 
       if (pathname.includes("/saves")) {
-        // window.location.reload();
+        console.log("pathname" + pathname);
         router.refresh();
       }
     } catch (err) {
