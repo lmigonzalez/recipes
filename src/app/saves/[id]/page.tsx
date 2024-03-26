@@ -27,8 +27,8 @@ async function getSavedRecipes(id: string) {
     return []
   }
 }
-
-const Page = async (params: User) => {
+interface Props { params: { id: string } }
+const Page = async ({params}: Props) => {
 
   const recipes = await getSavedRecipes(params.id);
 
