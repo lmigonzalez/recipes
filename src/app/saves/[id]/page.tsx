@@ -1,9 +1,7 @@
-import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import RecipeCard from "@/components/RecipeCard";
 import MainLinkBtn from "@/components/MainLinkBtn";
-export const dynamic = "force-dynamic";
-export const revalidate = 10;
+import { useRouter } from "next/router";
 export const metadata: Metadata = {
   title: "Saved Recipes | Recipes",
   description:
@@ -17,20 +15,23 @@ async function getSavedRecipes(id: string) {
     headers: {
       "Content-Type": "application/json",
     },
-    cache: "no-store", 
+    cache: "no-store",
   };
 
   try {
     const response = await fetch(url, options);
-    const result = await response.json() as Recipe[];
+    const result = (await response.json()) as Recipe[];
     return result;
   } catch (err) {
-    return []
+    return [];
   }
 }
-interface Props { params: { id: string } }
-const Page = async ({params}: Props) => {
-
+interface Props {
+  params: { id: string };
+}
+const Page = async ({ params }: Props) => {
+  const router = useRouter()
+  router.reload()
   const recipes = await getSavedRecipes(params.id);
 
   return (
@@ -39,9 +40,6 @@ const Page = async ({params}: Props) => {
         Your Saved Recipes
       </h1>
       <div className="grid md:grid-cols-3 gap-5">
-        <Suspense fallback={<p>Loading weather...</p>}>
-        
-      
         {recipes.length > 0 ? (
           recipes.map((item, index) => {
             return <RecipeCard key={index} recipeInfo={item} />;
@@ -51,7 +49,7 @@ const Page = async ({params}: Props) => {
             <p>You currently have no saved recipes.</p>
             <MainLinkBtn text="Explore Recipes" url="explore" />
           </div>
-        )}</Suspense>
+        )}
       </div>
     </main>
   );
