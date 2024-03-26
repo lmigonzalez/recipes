@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 
 async function getSavedRecipes(id: number) {
   const url = `https://recipes-seven-sand.vercel.app/api/users?id=${id}`;
-  const options = {
+  const options: RequestInit = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      cache: "no-cache",
     },
+    cache: "no-cache", // Move cache option inside the options object
   };
   try {
     const response = await fetch(url, options);
