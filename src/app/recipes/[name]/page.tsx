@@ -28,6 +28,7 @@ async function getRecipes(name: string) {
       "X-RapidAPI-Key": process.env.RAPID_API_KEY as string,
       "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
     },
+    cache: "no-store",
   };
 
   try {
