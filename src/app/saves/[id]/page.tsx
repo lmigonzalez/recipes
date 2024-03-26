@@ -15,7 +15,7 @@ async function getSavedRecipes(id: number) {
     headers: {
       "Content-Type": "application/json",
     },
-    cache: "no-cache", // Move cache option inside the options object
+    cache: "no-store", // Move cache option inside the options object
   };
   try {
     const response = await fetch(url, options);
@@ -33,6 +33,7 @@ interface RecipeProps {
 }
 
 const Page = async ({ params }: { params: { id: number } }) => {
+  
   const recipes: RecipeProps[] = await getSavedRecipes(params.id);
 
   return (
