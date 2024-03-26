@@ -31,7 +31,7 @@ interface Props {
 }
 const Page = async ({ params }: Props) => {
   const router = useRouter()
-  router.reload()
+  router.refresh()
   const recipes = await getSavedRecipes(params.id);
 
   return (
