@@ -35,7 +35,7 @@ async function getRecipes(name: string) {
     const {results} = await response.json() ;
     return results as SearchResult[];
   } catch (error) {
-    console.error(error);
+
     return []
   }
 }

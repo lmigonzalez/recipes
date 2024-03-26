@@ -31,14 +31,14 @@ async function getRecipeById(id: number) {
     const result = await response.json();
     return result as Recipe;
   } catch (err) {
-    console.log(err);
+    return null
   }
 }
 
 const Page = async ({ params }: { params: { id: number } }) => {
   const recipeInfo = await getRecipeById(params.id);
   if(!recipeInfo)return <p>Recipe Not Found</p>
-  console.log()
+ 
 
   return (
     <main className="medium-width py-32">

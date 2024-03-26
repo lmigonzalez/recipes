@@ -23,14 +23,13 @@ async function fetchRandomRecipes() {
     const {recipes} = await response.json()  ;
     return recipes as Recipe[]; 
   } catch (err) {
-    console.log(err);
     return []
   }
 }
 
 const Page = async () => {
   const  recipes  = await fetchRandomRecipes();
-  console.log(recipes)
+
   return (
     <main className="py-32 medium-width">
       <h1 className="text-3xl font-medium text-center mb-10 underline decoration-wavy decoration-my_red underline-offset-8">

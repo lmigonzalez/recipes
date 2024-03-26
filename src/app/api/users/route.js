@@ -57,7 +57,6 @@ export const PATCH = async (request) => {
       return new Response("Recipe added", { status: 200 });
     }
   } catch (e) {
-    console.error(e);
     return new Response("Error", { status: 500 });
   }
 };

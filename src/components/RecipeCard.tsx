@@ -15,7 +15,7 @@ const RecipeCard: FC<{ recipeInfo: Recipe | SearchResult }> = ({ recipeInfo }) =
   const router = useRouter();
 
   async function saveRecipe() {
-    console.log(session);
+ 
     if (!session) {
       setShowLoginWindow(true);
 
@@ -38,11 +38,11 @@ const RecipeCard: FC<{ recipeInfo: Recipe | SearchResult }> = ({ recipeInfo }) =
       });
 
       if (pathname.includes("/saves")) {
-        console.log("pathname" + pathname);
+
         router.refresh();
       }
     } catch (err) {
-      console.log(err);
+     return null
     }
   }
 

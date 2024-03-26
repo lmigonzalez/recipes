@@ -24,7 +24,6 @@ async function getSavedRecipes(id: string) {
     const result = await response.json() as Recipe[];
     return result;
   } catch (err) {
-    console.log(err);
     return []
   }
 }
